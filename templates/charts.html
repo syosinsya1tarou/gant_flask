@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ガントチャート</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>ガントチャートと売上データ</h1>
+    
+    <div id="gantt-chart"></div>
+    <div id="sales-chart"></div>
+    
+    <h2>元のプロモーション期間のデータ:</h2>
+    {{ gantt_table | safe }}
+    
+    <h2>選択された期間の売上データ:</h2>
+    {{ sales_table | safe }}
+
+    <script>
+        // ガントチャートの描画
+        var ganttChart = {{ gantt_chart | safe }};
+        Plotly.newPlot('gantt-chart', ganttChart.data, ganttChart.layout);
+        
+        // 売上データの折れ線グラフの描画
+        var salesChart = {{ sales_chart | safe }};
+        Plotly.newPlot('sales-chart', salesChart.data, salesChart.layout);
+    </script>
+</body>
+</html>
